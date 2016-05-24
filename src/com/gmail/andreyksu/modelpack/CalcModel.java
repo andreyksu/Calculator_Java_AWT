@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcIntefface;
+import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
 import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
 import com.gmail.andreyksu.modelpack.saver.SaverClassToFile;
 import com.gmail.andreyksu.modelpack.saver.SaverInterface;
@@ -21,7 +21,7 @@ public class CalcModel implements CalcModelInterface {
 
 	private SaverInterface saver;
 
-	private PerformCalcIntefface pci;
+	private CalculatorInterface pci;
 
 	private String expression;
 
@@ -35,7 +35,7 @@ public class CalcModel implements CalcModelInterface {
 	}
 
 	@Override
-	public void setPerformCalc(PerformCalcIntefface pci) {
+	public void setPerformCalc(CalculatorInterface pci) {
 		this.pci = pci;
 	}
 
@@ -43,12 +43,12 @@ public class CalcModel implements CalcModelInterface {
 	public String performCalc(String str) {
 		expression = str;
 		deltaMillis = System.currentTimeMillis();
-		if (!pci.validate(str) || str == null || str.length() == 0) {
-			resultString = "Not valid Expression!!!";
+		if (str == null || str.length() == 0) {
+			resultString = "Expression is empty!!!";
 			notifyResultObserver();
 			return resultString;
 		}
-		resultString = pci.perform(str);
+		resultString = pci.performingCalculations(str);
 		deltaMillis = System.currentTimeMillis() - deltaMillis;
 		notifyResultObserver();
 		return resultString;

@@ -4,30 +4,25 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class PerformCalcByJS implements PerformCalcIntefface {
+public class PerformCalcByJS implements CalculatorInterface {
 
-    private ScriptEngine engine;
+	private ScriptEngine engine;
 
-    public PerformCalcByJS() {
-        engine = new ScriptEngineManager().getEngineByName("js");
-    }
+	public PerformCalcByJS() {
+		engine = new ScriptEngineManager().getEngineByName("js");
+	}
 
-    @Override
-    public boolean validate(String str) {
-        return true;
-    }
-
-    @Override
-    public String perform(String str) {
-        String result = "";
-        try {
-            result = engine.eval(str).toString();
-        } catch (ScriptException e) {
-            System.out.print(">>>---");
-            System.out.println(e.getCause());
-            return "Not valid Expression!!!";
-        }
-        return result;
-    }
+	@Override
+	public String performingCalculations(String str) {
+		String result = "";
+		try {
+			result = engine.eval(str).toString();
+		} catch (ScriptException e) {
+			System.out.print(">>>---");
+			System.out.println(e.getCause());
+			return "Not valid Expression!!!";
+		}
+		return result;
+	}
 
 }

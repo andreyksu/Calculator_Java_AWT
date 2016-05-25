@@ -8,8 +8,8 @@ import com.gmail.andreyksu.modelpack.ICalcModel;
 public class MainClass {
 
     public static void main(String[] args) {
-        ICalcModel calcMosel = new CalcModel();
-        ICalcController calcController = new CalcController(calcMosel);
+        ICalcModel calcModel = new CalcModel();
+        ICalcController calcController = new CalcController(calcModel);
 
     }
 

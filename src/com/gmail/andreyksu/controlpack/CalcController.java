@@ -1,20 +1,22 @@
 package com.gmail.andreyksu.controlpack;
 
-import com.gmail.andreyksu.modelpack.CalcModelInterface;
-import com.gmail.andreyksu.observers.ResultObserverInterface;
+import com.gmail.andreyksu.modelpack.ICalcModel;
+import com.gmail.andreyksu.observers.IResultObserver;
+import com.gmail.andreyksu.observers.ITimeObserver;
 import com.gmail.andreyksu.viewpack.CalcViewer;
-import com.gmail.andreyksu.viewpack.CalcViewerInterface;
+import com.gmail.andreyksu.viewpack.ICalcViewer;
 
-public class CalcController implements CalcControllerInterface {
+public class CalcController implements ICalcController {
 
-	private CalcModelInterface calcModel;
+	private ICalcModel calcModel;
 
-	private CalcViewerInterface calcViewer;
+	private ICalcViewer calcViewer;
 
-	public CalcController(CalcModelInterface calcModel) {
+	public CalcController(ICalcModel calcModel) {
 		this.calcViewer = new CalcViewer(this);
 		this.calcModel = calcModel;
-		calcModel.registerObserver((ResultObserverInterface) this);
+		calcModel.registerObserver((IResultObserver) this);
+		calcModel.registerObserver((ITimeObserver) this);
 	}
 
 	@Override
@@ -27,7 +29,7 @@ public class CalcController implements CalcControllerInterface {
 
 	@Override
 	public void timeUpdate() {
-
+		System.out.println("TimerInController");
 	}
 
 	@Override

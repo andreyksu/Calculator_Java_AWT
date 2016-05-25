@@ -4,7 +4,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class PerformCalcByJS implements CalculatorInterface {
+public class PerformCalcByJS implements ICalculator {
 
 	private ScriptEngine engine;
 

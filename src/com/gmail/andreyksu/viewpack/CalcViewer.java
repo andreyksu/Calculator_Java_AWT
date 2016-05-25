@@ -14,18 +14,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.controlpack.CalcControllerInterface;
+import com.gmail.andreyksu.controlpack.ICalcController;
 
-public class CalcViewer extends Frame implements CalcViewerInterface {
+public class CalcViewer extends Frame implements ICalcViewer {
 
 	private PanelCalc panelCalc;
 
 	private Window hint;
 
-	// private ExecutorService es = Executors.newFixedThreadPool(1);
 	private ExecutorService es = Executors.newSingleThreadExecutor();
 
-	public CalcViewer(CalcControllerInterface calcController) {
+	public CalcViewer(ICalcController calcController) {
 		setTitle("Calucation");
 		panelCalc = new PanelCalc(calcController);
 		add(panelCalc);

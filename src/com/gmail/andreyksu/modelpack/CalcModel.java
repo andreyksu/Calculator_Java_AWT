@@ -4,52 +4,54 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
+import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
 import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
+import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
 import com.gmail.andreyksu.modelpack.saver.SaverClassToFile;
-import com.gmail.andreyksu.modelpack.saver.SaverInterface;
-import com.gmail.andreyksu.observers.ResultObserverInterface;
-import com.gmail.andreyksu.observers.TimeObserverInterface;
+import com.gmail.andreyksu.modelpack.saver.ISaver;
+import com.gmail.andreyksu.observers.IResultObserver;
+import com.gmail.andreyksu.observers.ITimeObserver;
 
-public class CalcModel implements CalcModelInterface {
+public class CalcModel implements ICalcModel {
 
-	private List<ResultObserverInterface> resultCalcObserver = new ArrayList<ResultObserverInterface>();
+	private List<IResultObserver> resultCalcObserver = new ArrayList<IResultObserver>();
 
-	private List<TimeObserverInterface> timeObserver = new ArrayList<TimeObserverInterface>();
+	private List<ITimeObserver> timeObserver = new ArrayList<ITimeObserver>();
 
-	private SaverInterface saver;
+	private ExecutorService es = Executors.newSingleThreadExecutor();
 
-	private CalculatorInterface pci;
+	private ISaver saver;
+
+	private ICalculator pci;
 
 	private String expression;
 
 	private String resultString;
 
-	private long deltaMillis = 0;
-
 	public CalcModel() {
-		pci = new PerformCalcByJS();
+		pci = new CalculatorWithRPN();
 		saver = new SaverClassToFile();
+		srartNotifyTime();
 	}
 
 	@Override
-	public void setPerformCalc(CalculatorInterface pci) {
+	public void setPerformCalc(ICalculator pci) {
 		this.pci = pci;
 	}
 
 	@Override
 	public String performCalc(String str) {
 		expression = str;
-		deltaMillis = System.currentTimeMillis();
 		if (str == null || str.length() == 0) {
-			resultString = "Expression is empty!!!";
+			resultString = "Expression is empty!";
 			notifyResultObserver();
 			return resultString;
 		}
 		resultString = pci.performingCalculations(str);
-		deltaMillis = System.currentTimeMillis() - deltaMillis;
 		notifyResultObserver();
 		return resultString;
 	}
@@ -57,13 +59,7 @@ public class CalcModel implements CalcModelInterface {
 	@Override
 	public String getTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
-		sdf.format(new Date());
-		return new Date().toString();
-	}
-
-	@Override
-	public String getComputingTime() {
-		return new Long(deltaMillis).toString();
+		return sdf.format(new Date());
 	}
 
 	@Override
@@ -85,17 +81,17 @@ public class CalcModel implements CalcModelInterface {
 			}
 		};
 		thread.setDaemon(true);
-		thread.start();
+		es.execute(thread);
 	}
 
 	synchronized private void notifyTimeObserver() {
-		for (TimeObserverInterface observer : timeObserver) {
+		for (ITimeObserver observer : timeObserver) {
 			observer.timeUpdate();
 		}
 	}
 
 	private void notifyResultObserver() {
-		for (ResultObserverInterface observer : resultCalcObserver) {
+		for (IResultObserver observer : resultCalcObserver) {
 			observer.resultUpdate();
 		}
 	}
@@ -106,31 +102,27 @@ public class CalcModel implements CalcModelInterface {
 	}
 
 	@Override
-	public void setSaver(SaverInterface saver) {
+	public void setSaver(ISaver saver) {
 		this.saver = saver;
 	}
 
 	@Override
-	public void registerObserver(ResultObserverInterface o) {
+	public void registerObserver(IResultObserver o) {
 		resultCalcObserver.add(o);
 	}
 
 	@Override
-	public void removeObserver(ResultObserverInterface o) {
+	public void removeObserver(IResultObserver o) {
 		resultCalcObserver.remove(o);
 	}
 
 	@Override
-	public void registerObserver(TimeObserverInterface o) {
-		if (!timeObserver.isEmpty()) {
-			srartNotifyTime();
-		}
+	public void registerObserver(ITimeObserver o) {
 		timeObserver.add(o);
-
 	}
 
 	@Override
-	public void removeObserver(TimeObserverInterface o) {
+	public void removeObserver(ITimeObserver o) {
 		timeObserver.remove(o);
 	}
 

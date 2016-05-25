@@ -7,9 +7,9 @@ public class ValidatorExpressionForRPN {
 		char[] chars = str.toCharArray();
 		long time = System.nanoTime();
 
-		if (validateOnContainsOtherChar(chars) && validateOnPairBraces(chars) && isOrderedBraces(chars)
-				&& isContainedEmptyBraces(chars) && isContainedPairOperators(chars)
-				&& isPairedOperatorAndClosedBrace(chars) && isOperatorBeginOrEnd(str)) {
+		if (validateOnPairBraces(chars) && isOrderedBraces(chars) && isContainedEmptyBraces(chars)
+				&& isContainedPairOperators(chars) && isPairedOperatorAndClosedBrace(chars)
+				&& isPairedOperatorAndOpenBrace(chars) && isOperatorBeginOrEnd(str)) {
 			time = System.nanoTime() - time;
 			System.out.println("Time validate: " + (time));
 			return true;
@@ -97,7 +97,7 @@ public class ValidatorExpressionForRPN {
 	private boolean isContainedPairOperators(char[] chars) {
 		int count1 = 0;
 		for (char c : chars) {
-			if (c == '/' || c == '-' || c == '+' || c == '*' || c == '.') {
+			if (c == '/' || c == '-' || c == '+' || c == '*' || c == '.' || c == '^') {
 				count1++;
 				if (count1 > 1) {
 					return false;
@@ -121,9 +121,32 @@ public class ValidatorExpressionForRPN {
 	private boolean isPairedOperatorAndClosedBrace(char[] chars) {
 		int count2 = 0;
 		for (char c : chars) {
-			if (c == '/' || c == '-' || c == '+' || c == '*' || c == '.') {
+			if (c == '/' || c == '-' || c == '+' || c == '*' || c == '.' || c == '^') {
 				count2++;
 			} else if (count2 > 0 && (c == ')' || c == '.')) {
+				return false;
+			} else {
+				count2 = 0;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Проверяет есть оператор и сразу идущая закрывающая скобка. Пример (* итд.
+	 * Если да то вернет false. Кроме (- разрешено.
+	 * 
+	 * @param chars
+	 *            - входной массив симолов
+	 * @return false, если последовательность вида "*)" или "-)", true, если
+	 *         таких последовательностей нет.
+	 */
+	private boolean isPairedOperatorAndOpenBrace(char[] chars) {
+		int count2 = 0;
+		for (char c : chars) {
+			if (c == '(') {
+				count2++;
+			} else if (count2 > 0 && (c == '/' || c == '+' || c == '*' || c == '.' || c == '^')) {
 				return false;
 			} else {
 				count2 = 0;
@@ -138,7 +161,7 @@ public class ValidatorExpressionForRPN {
 	 * символ "*" а последний ",".
 	 */
 	private boolean isOperatorBeginOrEnd(String str) {
-		char[] chats = { '+', '*', '/', '.' };
+		char[] chats = { '+', '*', '/', '.', '^' };
 		for (char c : chats) {
 			if (str.charAt(0) == c)
 				return false;

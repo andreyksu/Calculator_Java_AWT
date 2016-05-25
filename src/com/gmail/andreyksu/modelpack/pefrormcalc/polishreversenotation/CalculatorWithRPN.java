@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
+import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
 
-public class CalculatorWithRPN implements CalculatorInterface {
+public class CalculatorWithRPN implements ICalculator {
 
 	// TODO продумать в обратной польской записе проверку на валиднось без
-	// валидатора
-	// TODO минимально хотя бы на допустимые символы, т.е. при определении
-	// оператора выбрасывать исключение если -1.
-	// TODO максимально возложить и скобки и операторы.
+	// валидатора. Минимальное сделан, выкидывается исключение при определении приоритета операции. Нужно максимально возложить и скобки и операторы.
+	
+	// TODO продумать про ограничение на макс. значение рассчета.
 
 	ValidatorExpressionForRPN validator = new ValidatorExpressionForRPN();
 
@@ -77,8 +76,10 @@ public class CalculatorWithRPN implements CalculatorInterface {
 	 * польскую запись. при этом отличие от приведенного алгоритма в wiki не
 	 * проверяю здесь парность скобок так как делается это в валидаторе. Т.е.
 	 * разбираю чистую/провалидированную строку.
+	 * 
+	 * @throws UnsupportedOperatorException
 	 */
-	private List<String> trimToRPN(char[] chars) {
+	private List<String> trimToRPN(char[] chars) throws UnsupportedOperatorException {
 		StringBuilder compositeLine = new StringBuilder("");
 		List<String> polishList = new ArrayList<String>();
 		Stack<Character> stack = new Stack<Character>();
@@ -145,7 +146,7 @@ public class CalculatorWithRPN implements CalculatorInterface {
 		return polishList;
 	}
 
-	private int getOperatorPriority(char c) {
+	private int getOperatorPriority(char c) throws UnsupportedOperatorException {
 		switch (c) {
 		case '^':
 			return 4;
@@ -159,12 +160,14 @@ public class CalculatorWithRPN implements CalculatorInterface {
 			return 2;
 		case '(':
 			return 1;
+		case ')':
+			return 1;
 		default:
-			return -1;
+			throw new UnsupportedOperatorException(new Character(c).toString());
 		}
 	}
 
-	private String calcRPNStrin(List<String> list) {
+	private String calcRPNStrin(List<String> list) throws UnsupportedOperatorException {
 		String result;
 		List<String> listTmp = list;
 		Stack<Double> stack = new Stack<Double>();
@@ -193,9 +196,8 @@ public class CalculatorWithRPN implements CalculatorInterface {
 				case '+':
 					third = first + second;
 					break;
-
 				default:
-					break;
+					throw new UnsupportedOperatorException("2");
 				}
 				stack.push(third);
 			} else {
@@ -224,17 +226,21 @@ public class CalculatorWithRPN implements CalculatorInterface {
 	@Override
 	public String performingCalculations(String str) {
 		if (validate(str)) {
-			String readyLine = addZeroToNegativeValue(str);
-			char[] chars = readyLine.toCharArray();
-			List<String> list = trimToRPN(chars);
-			System.out.println("Raw String:  " + str);
-			System.out.println("Ready string to polish pars:  " + readyLine);
-			System.out.println("Polish string:  " + list);
-			readyLine = calcRPNStrin(list);
-			return readyLine;
+			try {
+				String readyLine = addZeroToNegativeValue(str);
+				char[] chars = readyLine.toCharArray();
+				List<String> list = trimToRPN(chars);
+				System.out.println("Raw String:  " + str);
+				System.out.println("Ready string to polish pars:  " + readyLine);
+				System.out.println("Polish string:  " + list);
+				readyLine = calcRPNStrin(list);
+				return readyLine;
+			} catch (UnsupportedOperatorException e) {
+				System.out.println(e.getMessage());
+				return "Contain Unsupported Opreator";
+			}
 		}
 		return "Not valide expression!!!";
-
 	}
 
 }

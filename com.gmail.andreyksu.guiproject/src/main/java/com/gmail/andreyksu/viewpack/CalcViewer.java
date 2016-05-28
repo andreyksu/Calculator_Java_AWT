@@ -54,7 +54,6 @@ public class CalcViewer extends Frame implements ICalcViewer {
         return new Point(x, y);
     }
 
-    @Override
     public void showHint(String message) {
         if (hint != null) {
             return;
@@ -84,7 +83,6 @@ public class CalcViewer extends Frame implements ICalcViewer {
         }
     }
 
-    @Override
     public void hideHint() {
         Runnable thread = new Sleeper();
         es.execute(thread);
@@ -92,7 +90,6 @@ public class CalcViewer extends Frame implements ICalcViewer {
 
     class Sleeper implements Runnable {
 
-        @Override
         public void run() {
             try {
                 TimeUnit.MILLISECONDS.sleep(1500);
@@ -107,32 +104,26 @@ public class CalcViewer extends Frame implements ICalcViewer {
 
     }
 
-    @Override
     public Button getPerformanceButton() {
         return panelCalc.getPerformanceButton();
     }
 
-    @Override
     public TextField getExpressionField() {
         return panelCalc.getExpressionField();
     }
 
-    @Override
     public TextField getResultField() {
         return panelCalc.getResultField();
     }
 
-    @Override
     public Button getSaveButton() {
         return panelCalc.getSaveButton();
     }
 
-    @Override
     public TextField getPathField() {
         return panelCalc.getPathField();
     }
 
-    @Override
     public PanelClock getClockPaint() {
         return panelClock;
     }

@@ -5,18 +5,20 @@ import java.awt.TextField;
 
 public interface ICalcViewer {
 
-	TextField getExpressionField();
+    TextField getExpressionField();
 
-	Button getPerformanceButton();
+    Button getPerformanceButton();
 
-	TextField getResultField();
+    TextField getResultField();
 
-	Button getSaveButton();
+    Button getSaveButton();
 
-	TextField getPathField();
+    TextField getPathField();
 
-	void showHint(String message);
+    void showHint(String message);
 
-	void hideHint();
+    void hideHint();
+
+    public PanelClock getClockPaint();
 
 }

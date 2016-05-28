@@ -1,5 +1,7 @@
 package com.gmail.andreyksu.controlpack;
 
+import java.util.Date;
+
 import com.gmail.andreyksu.modelpack.ICalcModel;
 import com.gmail.andreyksu.observers.IResultObserver;
 import com.gmail.andreyksu.observers.ITimeObserver;
@@ -29,7 +31,8 @@ public class CalcController implements ICalcController {
 
 	@Override
 	public void timeUpdate() {
-		System.out.println("TimerInController");
+	    calcViewer.getClockPaint().setSeconds(new Date().getSeconds(), new Date().getMinutes(),new Date().getHours());
+//		System.out.println("TimerInController");
 	}
 
 	@Override

@@ -3,11 +3,10 @@ package com.gmail.andreyksu.initpack;
 import java.util.Scanner;
 
 import com.gmail.andreyksu.modelpack.CalcModel;
-import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
 
 public class ClassForTestModel {
 
-	static Scanner in = new Scanner(System.in);;
+	static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		CalcModel cm = new CalcModel();

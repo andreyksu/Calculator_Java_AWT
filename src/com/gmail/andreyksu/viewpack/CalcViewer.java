@@ -3,6 +3,7 @@ package com.gmail.andreyksu.viewpack;
 import java.awt.Button;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -18,109 +19,122 @@ import com.gmail.andreyksu.controlpack.ICalcController;
 
 public class CalcViewer extends Frame implements ICalcViewer {
 
-	private PanelCalc panelCalc;
+    private PanelCalc panelCalc;
 
-	private Window hint;
+    private PanelClock panelClock;
 
-	private ExecutorService es = Executors.newSingleThreadExecutor();
+    private Window hint;
 
-	public CalcViewer(ICalcController calcController) {
-		setTitle("Calucation");
-		panelCalc = new PanelCalc(calcController);
-		add(panelCalc);
-		setSize(panelCalc.getPreferredSize());
-		setResizable(false);
-		setLocation(500, 500);
-		setVisible(true);
-		addWindowListener(new WindowAdapter() {
+    private ExecutorService es = Executors.newSingleThreadExecutor();
 
-			public void windowClosing(WindowEvent ev) {
-				System.exit(0);
-			}
-		});
-	}
+    public CalcViewer(ICalcController calcController) {
+        setLayout(new FlowLayout());
+        setTitle("Calucation");
+        panelCalc = new PanelCalc(calcController);
+        add(panelCalc);
+        panelClock = new PanelClock(calcController);
+        add(panelClock);
+        setSize(675, 275);
+        setResizable(false);
+        setLocation(500, 500);
+        setVisible(true);
+        addWindowListener(new WindowAdapter() {
 
-	private Point getPostionMous() {
-		int x = (int) (this.getMousePosition().getX() + this.getLocation().getX());
-		int y = (int) (this.getMousePosition().getY() + this.getLocation().getY());
-		return new Point(x, y);
-	}
+            public void windowClosing(WindowEvent ev) {
+                System.exit(0);
+            }
+        });
+    }
 
-	@Override
-	public void showHint(String message) {
-		if (hint != null) {
-			return;
-		}
-		hint = new Window(this);
-		MyCanvas canvas = new MyCanvas();
-		hint.setLocation(getPostionMous());
-		hint.setSize(300, 30);
-		canvas.setMessage(message);
-		hint.add(canvas);
-		hint.setVisible(true);
-	}
+    private Point getPostionMous() {
+        int x = (int) (this.getMousePosition().getX()
+                + this.getLocation().getX());
+        int y = (int) (this.getMousePosition().getY()
+                + this.getLocation().getY());
+        return new Point(x, y);
+    }
 
-	private class MyCanvas extends Canvas {
+    @Override
+    public void showHint(String message) {
+        if (hint != null) {
+            return;
+        }
+        hint = new Window(this);
+        MyCanvas canvas = new MyCanvas();
+        hint.setLocation(getPostionMous());
+        hint.setSize(300, 30);
+        canvas.setMessage(message);
+        hint.add(canvas);
+        hint.setVisible(true);
+    }
 
-		String message;
+    private class MyCanvas extends Canvas {
 
-		public void setMessage(String str) {
-			message = str;
-		}
+        String message;
 
-		public void paint(Graphics g) {
-			g.setColor(Color.BLACK);
-			g.drawRect(0, 0, this.getSize().width - 1, this.getSize().height - 1);
-			g.drawString(message, 10, 20);
-		}
-	}
+        public void setMessage(String str) {
+            message = str;
+        }
 
-	@Override
-	public void hideHint() {
-		Runnable thread = new Sleeper();
-		es.execute(thread);
-	}
+        public void paint(Graphics g) {
+            g.setColor(Color.BLACK);
+            g.drawRect(0, 0, this.getSize().width - 1,
+                    this.getSize().height - 1);
+            g.drawString(message, 10, 20);
+        }
+    }
 
-	class Sleeper implements Runnable {
+    @Override
+    public void hideHint() {
+        Runnable thread = new Sleeper();
+        es.execute(thread);
+    }
 
-		@Override
-		public void run() {
-			try {
-				TimeUnit.MILLISECONDS.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if (hint != null) {
-				hint.dispose();
-			}
-			hint = null;
-		}
+    class Sleeper implements Runnable {
 
-	}
+        @Override
+        public void run() {
+            try {
+                TimeUnit.MILLISECONDS.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (hint != null) {
+                hint.dispose();
+            }
+            hint = null;
+        }
 
-	@Override
-	public Button getPerformanceButton() {
-		return panelCalc.getPerformanceButton();
-	}
+    }
 
-	@Override
-	public TextField getExpressionField() {
-		return panelCalc.getExpressionField();
-	}
+    @Override
+    public Button getPerformanceButton() {
+        return panelCalc.getPerformanceButton();
+    }
 
-	@Override
-	public TextField getResultField() {
-		return panelCalc.getResultField();
-	}
+    @Override
+    public TextField getExpressionField() {
+        return panelCalc.getExpressionField();
+    }
 
-	@Override
-	public Button getSaveButton() {
-		return panelCalc.getSaveButton();
-	}
+    @Override
+    public TextField getResultField() {
+        return panelCalc.getResultField();
+    }
 
-	@Override
-	public TextField getPathField() {
-		return panelCalc.getPathField();
-	}
+    @Override
+    public Button getSaveButton() {
+        return panelCalc.getSaveButton();
+    }
+
+    @Override
+    public TextField getPathField() {
+        return panelCalc.getPathField();
+    }
+
+    @Override
+    public PanelClock getClockPaint() {
+        return panelClock;
+    }
 
 }

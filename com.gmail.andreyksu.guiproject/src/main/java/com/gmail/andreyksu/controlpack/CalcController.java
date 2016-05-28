@@ -53,7 +53,7 @@ public class CalcController implements ICalcController {
             }
 
         } else {
-            message = "Incorrect path. Void or contain flaw!";
+            message = "Path void or contain flaw!";
             setVisibleHint(message);
         }
 

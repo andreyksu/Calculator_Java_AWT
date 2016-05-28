@@ -1,2 +1,2 @@
 # calc
-calc on awt and reverse Polish notation
+Сalc on awt and ReversePolishNotation + Clock

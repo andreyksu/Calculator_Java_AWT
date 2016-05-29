@@ -20,7 +20,6 @@ public class CalculatorWithRPN implements ICalculator {
         String expression = removeFlaw(str);
         boolean valid = validator.validate(expression);
         return valid;
-
     }
 
     private String removeFlaw(String str) {

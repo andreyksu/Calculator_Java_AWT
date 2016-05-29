@@ -13,7 +13,5 @@ public class ClassForTestModel {
 //		cm.setPerformCalc(new CalculatorWithRPN());
 		System.out.println(cm.performCalc("-(2*(-08.0+2.0*(-5))/(-1+3*(-2)-(-4)))+4*2.0^2"));
 		System.out.println(cm.performCalc("-(22*(-08.0+2.0*(-5))/(-1+3*(-2)-(-4^3)))"));
-	
 	}
-
 }

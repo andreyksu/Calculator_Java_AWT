@@ -10,7 +10,5 @@ public class MainClass {
     public static void main(String[] args) {
         ICalcModel calcModel = new CalcModel();
         ICalcController calcController = new CalcController(calcModel);
-
     }
-
 }

@@ -1,6 +1,8 @@
 package com.gmail.andreyksu.viewpack;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
 import com.gmail.andreyksu.controlpack.ICalcController;
 
@@ -26,7 +28,8 @@ public class PanelClock extends Panel {
         repaint();
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics gr) {
+        Graphics2D g = (Graphics2D) gr;
         int R1 = 89, R2 = 96;
         int dx = 160, dy = 120;
         int[] xy1, xy2;
@@ -41,15 +44,38 @@ public class PanelClock extends Panel {
             xySec = getXY(R2 + 3, seconds, 60, dx, dy, -Math.PI / 2);
             g.drawLine(dx, dy, xySec[0], xySec[1]);
 
-            xyMin = getXY(R2 - 15, minut, 60, dx, dy, -Math.PI / 2);
+            xyMin = getXY(R2 - 20, minut, 60, dx, dy, -Math.PI / 2);
+
+            BasicStroke minuteline = new BasicStroke(2);
+            g.setStroke(minuteline);
+            g.draw(new Line2D.Double(dx, dy, xyMin[0], xyMin[1]));
+
             g.drawLine(dx, dy, xyMin[0], xyMin[1]);
 
-            xyHour = getXY(R2 - 25, hour, 12, dx, dy, -Math.PI / 2);
+            xyHour = getXY(R2 - 43, hour, 12, dx, dy,
+                    -Math.PI / 2 + getOffsetForHours());
+            BasicStroke hoursline = new BasicStroke(3);
+            g.setStroke(hoursline);
+            g.draw(new Line2D.Double(dx, dy, xyHour[0], xyHour[1]));
+
             g.drawLine(dx, dy, xyHour[0], xyHour[1]);
 
             g.drawString(hour + " : " + minut + " : " + seconds, 125, 235);
         }
 
+    }
+
+    private double getOffsetForHours() {
+        double offsetHour = 0;
+        if (minut < 5)
+            offsetHour = 0;
+        else if (minut < 30)
+            offsetHour = Math.PI / 24;
+        else if (minut < 45)
+            offsetHour = 2 * Math.PI / 24;
+        else if (minut < 61)
+            offsetHour = 3 * Math.PI / 24;
+        return offsetHour;
     }
 
     private int[] getXY(int R, int k, int d, int x, int y, double rad) {

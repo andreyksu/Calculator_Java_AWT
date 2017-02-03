@@ -15,9 +15,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.controlpack.ICalcController;
+import com.gmail.andreyksu.controlpack.CalcControllerInterface;
 
-public class CalcViewer extends Frame implements ICalcViewer {
+public class CalcViewer extends Frame implements CalcViewerInterface {
 
     private PanelCalc panelCalc;
 
@@ -27,7 +27,7 @@ public class CalcViewer extends Frame implements ICalcViewer {
 
     private ExecutorService es = Executors.newSingleThreadExecutor();
 
-    public CalcViewer(ICalcController calcController) {
+    public CalcViewer(CalcControllerInterface calcController) {
         setLayout(new FlowLayout());
         setTitle("Calucation");
         panelCalc = new PanelCalc(calcController);

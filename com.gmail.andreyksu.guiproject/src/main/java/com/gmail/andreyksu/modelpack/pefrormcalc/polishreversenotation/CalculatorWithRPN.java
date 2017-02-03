@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
+import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
 
-public class CalculatorWithRPN implements ICalculator {
+public class CalculatorWithRPN implements CalculatorInterface {
 
     // TODO продумать в обратной польской записе проверку на валиднось без
     // валидатора. Минимальное сделан, выкидывается исключение при определении

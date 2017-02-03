@@ -8,26 +8,26 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
+import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
 import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
 import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
 import com.gmail.andreyksu.modelpack.saver.SaverClassToFile;
-import com.gmail.andreyksu.modelpack.saver.ISaver;
-import com.gmail.andreyksu.observers.IResultObserver;
-import com.gmail.andreyksu.observers.ITimeObserver;
+import com.gmail.andreyksu.modelpack.saver.SaverInterface;
+import com.gmail.andreyksu.observers.ResultObserverInterface;
+import com.gmail.andreyksu.observers.TimeObserverInterface;
 
-public class CalcModel implements ICalcModel {
+public class CalcModel implements CalcModelInterface {
 
-    private List<IResultObserver> resultCalcObserver =
-            new ArrayList<IResultObserver>();
+    private List<ResultObserverInterface> resultCalcObserver =
+            new ArrayList<ResultObserverInterface>();
 
-    private List<ITimeObserver> timeObserver = new ArrayList<ITimeObserver>();
+    private List<TimeObserverInterface> timeObserver = new ArrayList<TimeObserverInterface>();
 
     private ExecutorService es = Executors.newSingleThreadExecutor();
 
-    private ISaver saver;
+    private SaverInterface saver;
 
-    private ICalculator pci;
+    private CalculatorInterface pci;
 
     private String expression;
 
@@ -39,7 +39,7 @@ public class CalcModel implements ICalcModel {
         srartNotifyTime();
     }
 
-    public void setPerformCalc(ICalculator pci) {
+    public void setPerformCalc(CalculatorInterface pci) {
         this.pci = pci;
     }
 
@@ -83,13 +83,13 @@ public class CalcModel implements ICalcModel {
     }
 
     synchronized private void notifyTimeObserver() {
-        for (ITimeObserver observer : timeObserver) {
+        for (TimeObserverInterface observer : timeObserver) {
             observer.timeUpdate();
         }
     }
 
     private void notifyResultObserver() {
-        for (IResultObserver observer : resultCalcObserver) {
+        for (ResultObserverInterface observer : resultCalcObserver) {
             observer.resultUpdate();
         }
     }
@@ -98,23 +98,23 @@ public class CalcModel implements ICalcModel {
         return saver.save(path, getTime(), resultString, expression);
     }
 
-    public void setSaver(ISaver saver) {
+    public void setSaver(SaverInterface saver) {
         this.saver = saver;
     }
 
-    public void registerObserver(IResultObserver o) {
+    public void registerObserver(ResultObserverInterface o) {
         resultCalcObserver.add(o);
     }
 
-    public void removeObserver(IResultObserver o) {
+    public void removeObserver(ResultObserverInterface o) {
         resultCalcObserver.remove(o);
     }
 
-    public void registerObserver(ITimeObserver o) {
+    public void registerObserver(TimeObserverInterface o) {
         timeObserver.add(o);
     }
 
-    public void removeObserver(ITimeObserver o) {
+    public void removeObserver(TimeObserverInterface o) {
         timeObserver.remove(o);
     }
 

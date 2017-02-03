@@ -1,6 +1,6 @@
 package com.gmail.andreyksu.observers;
 
-public interface IResultObserver {
+public interface ResultObserverInterface {
 
     void resultUpdate();
 

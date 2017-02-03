@@ -1,6 +1,6 @@
 package com.gmail.andreyksu.observers;
 
-public interface ITimeObserver {
+public interface TimeObserverInterface {
 
     void timeUpdate();
 

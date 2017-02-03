@@ -2,23 +2,23 @@ package com.gmail.andreyksu.controlpack;
 
 import java.util.Date;
 
-import com.gmail.andreyksu.modelpack.ICalcModel;
-import com.gmail.andreyksu.observers.IResultObserver;
-import com.gmail.andreyksu.observers.ITimeObserver;
+import com.gmail.andreyksu.modelpack.CalcModelInterface;
+import com.gmail.andreyksu.observers.ResultObserverInterface;
+import com.gmail.andreyksu.observers.TimeObserverInterface;
 import com.gmail.andreyksu.viewpack.CalcViewer;
-import com.gmail.andreyksu.viewpack.ICalcViewer;
+import com.gmail.andreyksu.viewpack.CalcViewerInterface;
 
-public class CalcController implements ICalcController {
+public class CalcController implements CalcControllerInterface {
 
-    private ICalcModel calcModel;
+    private CalcModelInterface calcModel;
 
-    private ICalcViewer calcViewer;
+    private CalcViewerInterface calcViewer;
 
-    public CalcController(ICalcModel calcModel) {
+    public CalcController(CalcModelInterface calcModel) {
         this.calcViewer = new CalcViewer(this);
         this.calcModel = calcModel;
-        calcModel.registerObserver((IResultObserver) this);
-        calcModel.registerObserver((ITimeObserver) this);
+        calcModel.registerObserver((ResultObserverInterface) this);
+        calcModel.registerObserver((TimeObserverInterface) this);
     }
 
     public void resultUpdate() {

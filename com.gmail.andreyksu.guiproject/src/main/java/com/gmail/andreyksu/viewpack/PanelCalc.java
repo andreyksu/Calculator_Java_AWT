@@ -16,6 +16,9 @@ import java.awt.event.TextListener;
 
 import com.gmail.andreyksu.controlpack.ICalcController;
 
+/**
+ * Класс служит для конструирования и отображения полей самого калькулятора.
+ */
 public class PanelCalc extends Panel {
 
     private ICalcController calcController;

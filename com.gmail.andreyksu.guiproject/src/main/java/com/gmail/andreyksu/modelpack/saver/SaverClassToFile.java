@@ -5,6 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+//TODO:Заменить консольные выводы на логирование через LOG4J. 
+
+/**
+ * Используется моделью для сохранения результатов рассчета в файл.
+ * 
+ */
 public class SaverClassToFile implements ISaver {
 
     PrintWriter pw;

@@ -83,6 +83,11 @@ public class CalcViewer extends Frame implements ICalcViewer {
         }
     }
 
+    /**
+     * Скрывает хинт/подсказку о невалидности строки для файла сохранения
+     * результатов. Закрытие происходит через 1,5, отдельном потоке.
+     * {@inheritDoc}
+     */
     public void hideHint() {
         Runnable thread = new Sleeper();
         es.execute(thread);

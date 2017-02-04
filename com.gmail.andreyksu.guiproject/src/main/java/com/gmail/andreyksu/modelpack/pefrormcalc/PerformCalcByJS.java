@@ -8,6 +8,8 @@ import javax.script.ScriptException;
 import org.apache.logging.log4j.*;
 
 
+//TODO: Удалить консольные выводы.
+
 @SuppressWarnings("restriction")
 public class PerformCalcByJS implements ICalculator {
     

@@ -15,11 +15,11 @@ public class CalcController implements ICalcController {
     private ICalcViewer calcViewer;
 
     /**
-     * 
      * Конструктор
-     * @param calcModel
-     * Инициализируется Въювер и Присваевается ссылка на модель.
-     * Происходит регистрация наблюдателей за событиями; "расчет выполнен" и "время/таймер".
+     * 
+     * @param calcModel Инициализируется въювер и присваевается ссылка на
+     *            модель. Происходит регистрация наблюдателей за событиями;
+     *            "расчет выполнен" и "время/таймер".
      */
     public CalcController(ICalcModel calcModel) {
         this.calcViewer = new CalcViewer(this);
@@ -28,6 +28,10 @@ public class CalcController implements ICalcController {
         calcModel.registerObserver((ITimeObserver) this);
     }
 
+    /**
+     * Данный мотод вызывается автоматом в моделе после окончания расчета.
+     * Получает результат у модельки и отображает результат во въюхе.
+     */
     public void resultUpdate() {
         String result = calcModel.getResult();
         calcViewer.getResultField().setText(result);
@@ -35,11 +39,19 @@ public class CalcController implements ICalcController {
 
     }
 
+    /**
+     * Данный метод вызывается автоматом в отдельном потоке модели (в методе
+     * resultUpdate()) каждую секунду, для отрисовки времени.
+     */
+
     public void timeUpdate() {
         calcViewer.getClockPaint().setSeconds(new Date().getSeconds(),
                 new Date().getMinutes(), new Date().getHours());
     }
 
+    /**
+     * Вызывается во въюхе при нажатии кнопки рассчитать. {@inheritDoc}
+     */
     public void performCalc() {
         String expression = calcViewer.getExpressionField().getText();
         calcViewer.getPerformanceButton().setEnabled(false);
@@ -47,6 +59,9 @@ public class CalcController implements ICalcController {
 
     }
 
+    /**
+     * Вызывается во въюхе при нажатии кнопки сохранить. {@inheritDoc}
+     */
     public void saveResult() {
         String message = null;
         String path = calcViewer.getPathField().getText();
@@ -66,6 +81,13 @@ public class CalcController implements ICalcController {
 
     }
 
+    /**
+     * Проверяет путь на корреткность перед сохранением. TODO: Нужно
+     * переосмыслить данный метод и его необходимость.
+     * 
+     * @param path
+     * @return
+     */
     private boolean validatePath(String path) {
         char[] b;
         if (path.isEmpty()) {
@@ -79,6 +101,12 @@ public class CalcController implements ICalcController {
         return true;
     }
 
+    /**
+     * Класс служит для открытия подсказки и закрытия ее по прошествии 1.5с.
+     * Закрытие происходит в отдельном потоке. См. реализацию закрытия во въюхе.
+     * 
+     * @param message
+     */
     public void setVisibleHint(String message) {
         calcViewer.showHint(message);
         calcViewer.hideHint();

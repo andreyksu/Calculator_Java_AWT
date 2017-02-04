@@ -34,12 +34,13 @@ public class CalcModel implements ICalcModel {
     private String resultString;
 
     public CalcModel() {
-        //pci = new CalculatorWithRPN();
+        // pci = new CalculatorWithRPN();
         pci = new PerformCalcByJS();
         saver = new SaverClassToFile();
         srartNotifyTime();
     }
 
+    // TODO: Нужно сделать переключение через радио-кнопку во въюхе.
     public void setPerformCalc(ICalculator pci) {
         this.pci = pci;
     }
@@ -56,6 +57,11 @@ public class CalcModel implements ICalcModel {
         return resultString;
     }
 
+    /**
+     * Метод служит для получения времени в момент записи результатов расчетов в
+     * файл.
+     */
+
     public String getTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
         return sdf.format(new Date());
@@ -65,6 +71,10 @@ public class CalcModel implements ICalcModel {
         return resultString;
     }
 
+    /**
+     * Солужит для обновления времени во въюхе. В отдельном потоке каждую
+     * секунду запускает перерисовку во въюхе. Вызов идет через Контроллер.
+     */
     private void srartNotifyTime() {
         Thread thread = new Thread() {
 

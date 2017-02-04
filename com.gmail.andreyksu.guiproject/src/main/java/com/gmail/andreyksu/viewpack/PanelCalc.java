@@ -14,11 +14,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
 
-import com.gmail.andreyksu.controlpack.CalcControllerInterface;
+import com.gmail.andreyksu.controlpack.ICalcController;
 
 public class PanelCalc extends Panel {
 
-    private CalcControllerInterface calcController;
+    private ICalcController calcController;
 
     private EnterPanel enterPanel = new EnterPanel();
 
@@ -30,7 +30,7 @@ public class PanelCalc extends Panel {
 
     private SavePanelButton savePanelButton = new SavePanelButton();
 
-    public PanelCalc(CalcControllerInterface calcController) {
+    public PanelCalc(ICalcController calcController) {
         super(new GridLayout(5, 1, 5, 5));
         this.calcController = calcController;
         setPreferredSize(new Dimension(330, 255));

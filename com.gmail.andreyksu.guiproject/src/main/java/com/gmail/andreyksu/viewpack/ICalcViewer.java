@@ -3,7 +3,7 @@ package com.gmail.andreyksu.viewpack;
 import java.awt.Button;
 import java.awt.TextField;
 
-public interface CalcViewerInterface {
+public interface ICalcViewer {
 
     TextField getExpressionField();
 

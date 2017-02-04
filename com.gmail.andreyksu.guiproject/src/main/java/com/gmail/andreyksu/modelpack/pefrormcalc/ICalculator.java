@@ -1,6 +1,6 @@
 package com.gmail.andreyksu.modelpack.pefrormcalc;
 
-public interface CalculatorInterface {
+public interface ICalculator {
 
 	String performingCalculations(String stg);
 }

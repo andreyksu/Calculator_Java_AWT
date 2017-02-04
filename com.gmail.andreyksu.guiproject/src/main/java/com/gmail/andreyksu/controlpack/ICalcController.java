@@ -1,9 +1,9 @@
 package com.gmail.andreyksu.controlpack;
 
-import com.gmail.andreyksu.observers.ResultObserverInterface;
-import com.gmail.andreyksu.observers.TimeObserverInterface;
+import com.gmail.andreyksu.observers.IResultObserver;
+import com.gmail.andreyksu.observers.ITimeObserver;
 
-public interface CalcControllerInterface extends ResultObserverInterface, TimeObserverInterface {
+public interface ICalcController extends IResultObserver, ITimeObserver {
 
 	void performCalc();
 

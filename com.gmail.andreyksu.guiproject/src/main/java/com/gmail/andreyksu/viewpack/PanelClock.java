@@ -5,19 +5,19 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.StringTokenizer;
 
-import com.gmail.andreyksu.controlpack.CalcControllerInterface;
+import com.gmail.andreyksu.controlpack.ICalcController;
 
 public class PanelClock extends Panel {
 
 	private String strr;
 
-	CalcControllerInterface calcController;
+	ICalcController calcController;
 
 	int seconds, minut, hour;
 
 	boolean init = false;
 
-	public PanelClock(CalcControllerInterface calcController) {
+	public PanelClock(ICalcController calcController) {
 		this.calcController = calcController;
 		setPreferredSize(new Dimension(330, 255));
 

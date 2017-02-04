@@ -1,9 +1,9 @@
 package com.gmail.andreyksu.initpack;
 
 import com.gmail.andreyksu.controlpack.CalcController;
-import com.gmail.andreyksu.controlpack.CalcControllerInterface;
+import com.gmail.andreyksu.controlpack.ICalcController;
 import com.gmail.andreyksu.modelpack.CalcModel;
-import com.gmail.andreyksu.modelpack.CalcModelInterface;
+import com.gmail.andreyksu.modelpack.ICalcModel;
 
 public class MainClass {
     
@@ -20,7 +20,7 @@ public class MainClass {
      * Инициируется модель и контроллер. 
      */
     public static void main(String[] args) {
-        CalcModelInterface calcModel = new CalcModel();
-        CalcControllerInterface calcController = new CalcController(calcModel);
+        ICalcModel calcModel = new CalcModel();
+        ICalcController calcController = new CalcController(calcModel);
     }
 }

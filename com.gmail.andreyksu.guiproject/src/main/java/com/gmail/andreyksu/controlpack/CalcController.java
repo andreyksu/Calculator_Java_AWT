@@ -2,23 +2,30 @@ package com.gmail.andreyksu.controlpack;
 
 import java.util.Date;
 
-import com.gmail.andreyksu.modelpack.CalcModelInterface;
-import com.gmail.andreyksu.observers.ResultObserverInterface;
-import com.gmail.andreyksu.observers.TimeObserverInterface;
+import com.gmail.andreyksu.modelpack.ICalcModel;
+import com.gmail.andreyksu.observers.IResultObserver;
+import com.gmail.andreyksu.observers.ITimeObserver;
 import com.gmail.andreyksu.viewpack.CalcViewer;
-import com.gmail.andreyksu.viewpack.CalcViewerInterface;
+import com.gmail.andreyksu.viewpack.ICalcViewer;
 
-public class CalcController implements CalcControllerInterface {
+public class CalcController implements ICalcController {
 
-    private CalcModelInterface calcModel;
+    private ICalcModel calcModel;
 
-    private CalcViewerInterface calcViewer;
+    private ICalcViewer calcViewer;
 
-    public CalcController(CalcModelInterface calcModel) {
+    /**
+     * 
+     * Конструктор
+     * @param calcModel
+     * Инициализируется Въювер и Присваевается ссылка на модель.
+     * Происходит регистрация наблюдателей за событиями; "расчет выполнен" и "время/таймер".
+     */
+    public CalcController(ICalcModel calcModel) {
         this.calcViewer = new CalcViewer(this);
         this.calcModel = calcModel;
-        calcModel.registerObserver((ResultObserverInterface) this);
-        calcModel.registerObserver((TimeObserverInterface) this);
+        calcModel.registerObserver((IResultObserver) this);
+        calcModel.registerObserver((ITimeObserver) this);
     }
 
     public void resultUpdate() {

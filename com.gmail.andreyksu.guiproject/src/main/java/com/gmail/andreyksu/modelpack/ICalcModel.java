@@ -1,11 +1,11 @@
 package com.gmail.andreyksu.modelpack;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
-import com.gmail.andreyksu.modelpack.saver.SaverInterface;
-import com.gmail.andreyksu.observers.ResultObserverInterface;
-import com.gmail.andreyksu.observers.TimeObserverInterface;
+import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
+import com.gmail.andreyksu.modelpack.saver.ISaver;
+import com.gmail.andreyksu.observers.IResultObserver;
+import com.gmail.andreyksu.observers.ITimeObserver;
 
-public interface CalcModelInterface {
+public interface ICalcModel {
 
     String performCalc(String str);
 
@@ -15,18 +15,18 @@ public interface CalcModelInterface {
 
     String saveResult(String path);
 
-    void setPerformCalc(CalculatorInterface pci);
+    void setPerformCalc(ICalculator pci);
 
-    void setSaver(SaverInterface saver);
+    void setSaver(ISaver saver);
 
     /**
      * This section for observer
      */
-    void registerObserver(ResultObserverInterface o);
+    void registerObserver(IResultObserver o);
 
-    void removeObserver(ResultObserverInterface o);
+    void removeObserver(IResultObserver o);
 
-    void registerObserver(TimeObserverInterface o);
+    void registerObserver(ITimeObserver o);
 
-    void removeObserver(TimeObserverInterface o);
+    void removeObserver(ITimeObserver o);
 }

@@ -8,38 +8,39 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.CalculatorInterface;
+import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
 import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
 import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
 import com.gmail.andreyksu.modelpack.saver.SaverClassToFile;
-import com.gmail.andreyksu.modelpack.saver.SaverInterface;
-import com.gmail.andreyksu.observers.ResultObserverInterface;
-import com.gmail.andreyksu.observers.TimeObserverInterface;
+import com.gmail.andreyksu.modelpack.saver.ISaver;
+import com.gmail.andreyksu.observers.IResultObserver;
+import com.gmail.andreyksu.observers.ITimeObserver;
 
-public class CalcModel implements CalcModelInterface {
+public class CalcModel implements ICalcModel {
 
-    private List<ResultObserverInterface> resultCalcObserver =
-            new ArrayList<ResultObserverInterface>();
+    private List<IResultObserver> resultCalcObserver =
+            new ArrayList<IResultObserver>();
 
-    private List<TimeObserverInterface> timeObserver = new ArrayList<TimeObserverInterface>();
+    private List<ITimeObserver> timeObserver = new ArrayList<ITimeObserver>();
 
     private ExecutorService es = Executors.newSingleThreadExecutor();
 
-    private SaverInterface saver;
+    private ISaver saver;
 
-    private CalculatorInterface pci;
+    private ICalculator pci;
 
     private String expression;
 
     private String resultString;
 
     public CalcModel() {
-        pci = new CalculatorWithRPN();
+        //pci = new CalculatorWithRPN();
+        pci = new PerformCalcByJS();
         saver = new SaverClassToFile();
         srartNotifyTime();
     }
 
-    public void setPerformCalc(CalculatorInterface pci) {
+    public void setPerformCalc(ICalculator pci) {
         this.pci = pci;
     }
 
@@ -83,13 +84,13 @@ public class CalcModel implements CalcModelInterface {
     }
 
     synchronized private void notifyTimeObserver() {
-        for (TimeObserverInterface observer : timeObserver) {
+        for (ITimeObserver observer : timeObserver) {
             observer.timeUpdate();
         }
     }
 
     private void notifyResultObserver() {
-        for (ResultObserverInterface observer : resultCalcObserver) {
+        for (IResultObserver observer : resultCalcObserver) {
             observer.resultUpdate();
         }
     }
@@ -98,23 +99,23 @@ public class CalcModel implements CalcModelInterface {
         return saver.save(path, getTime(), resultString, expression);
     }
 
-    public void setSaver(SaverInterface saver) {
+    public void setSaver(ISaver saver) {
         this.saver = saver;
     }
 
-    public void registerObserver(ResultObserverInterface o) {
+    public void registerObserver(IResultObserver o) {
         resultCalcObserver.add(o);
     }
 
-    public void removeObserver(ResultObserverInterface o) {
+    public void removeObserver(IResultObserver o) {
         resultCalcObserver.remove(o);
     }
 
-    public void registerObserver(TimeObserverInterface o) {
+    public void registerObserver(ITimeObserver o) {
         timeObserver.add(o);
     }
 
-    public void removeObserver(TimeObserverInterface o) {
+    public void removeObserver(ITimeObserver o) {
         timeObserver.remove(o);
     }
 

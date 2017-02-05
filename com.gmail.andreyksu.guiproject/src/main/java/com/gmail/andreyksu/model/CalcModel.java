@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack;
+package com.gmail.andreyksu.model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ public class CalcModel implements ICalcModel {
     private String resultString;
 
     public CalcModel() {
-        // pci = new CalculatorWithRPN();
-        pci = new PerformCalcByJS();
+        pci = new CalculatorWithRPN();
+//        pci = new PerformCalcByJS();
         saver = new SaverClassToFile();
         srartNotifyTime();
     }
@@ -45,6 +45,10 @@ public class CalcModel implements ICalcModel {
         this.pci = pci;
     }
 
+    /**
+     * Принимает на вход строук для расчета. Возвращает строку с результатом
+     * расчетов, в протином случае строку с сообщением для пользователя.
+     */
     public String performCalc(String str) {
         expression = str;
         if (str == null || str.length() == 0) {

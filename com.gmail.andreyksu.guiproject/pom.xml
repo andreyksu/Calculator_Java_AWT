@@ -37,7 +37,7 @@
 		<!-- Настройки в данной секции соответствуют дефолтным. Данную секцию можно 
 			и не указывать так как, данные настройки задаются автоматом. -->
 		<outputDirectory>target/classes</outputDirectory>
-		<!--<finalName>calc</finalName>-->
+		<!--<finalName>calc</finalName> -->
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
@@ -103,7 +103,8 @@
 								<addClasspath>true</addClasspath>
 								<classpathPrefix>lib/</classpathPrefix>
 								<classpathLayoutType>simple</classpathLayoutType>
-								<mainClass>com.gmail.andreyksu.initpack.MainClass</mainClass>
+								<!--<mainClass>${mainClass}</mainClass> -->
+								<mainClass>com.gmail.andreyksu.entrance.MainClass</mainClass>
 							</manifest>
 						</archive>
 						<!--<finalName>calc</finalName> -->

@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
+import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
 
 public class CalculatorWithRPN implements ICalculator {
 
@@ -13,6 +17,9 @@ public class CalculatorWithRPN implements ICalculator {
     // приоритета операции. Нужно максимально возложить и скобки и операторы.
 
     // TODO продумать про ограничение на макс. значение рассчета.
+
+    private static final Logger log =
+            LogManager.getLogger(CalculatorWithRPN.class);
 
     ValidatorExpressionForRPN validator = new ValidatorExpressionForRPN();
 
@@ -227,8 +234,9 @@ public class CalculatorWithRPN implements ICalculator {
     }
 
     /**
-     * Выполняет рассчет предварительно провалидированного выражения методом
-     * {@link validate(String str)}
+     * Принимает на вход предварительно провалидированную строку. Строку для
+     * расчета. Возвращает строку с результатом расчетов, в протином случае
+     * строку с сообщением для пользователя.
      */
     public String performingCalculations(String str) {
         if (validate(str)) {
@@ -236,14 +244,14 @@ public class CalculatorWithRPN implements ICalculator {
                 String readyLine = addZeroToNegativeValue(str);
                 char[] chars = readyLine.toCharArray();
                 List<String> list = trimToRPN(chars);
-                System.out.println("Raw String:  " + str);
-                System.out
-                        .println("Ready string to polish pars:  " + readyLine);
-                System.out.println("Polish string:  " + list);
+                log.info("Raw String:  " + str);
+                log.info("Ready string to polish pars:  " + readyLine);
+                log.info("Polish string:  " + list);
                 readyLine = calcRPNStrin(list);
                 return readyLine;
             } catch (UnsupportedOperatorException e) {
-                System.out.println(e.getMessage());
+                log.error("Невалидная строка. Невозможно произвести расчет.",
+                        e.getCause());
                 return "Contain Unsupported Opreator";
             }
         }

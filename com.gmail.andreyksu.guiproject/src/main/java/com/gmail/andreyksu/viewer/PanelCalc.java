@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.viewpack;
+package com.gmail.andreyksu.viewer;
 
 import java.awt.Button;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
 
-import com.gmail.andreyksu.controlpack.ICalcController;
+import com.gmail.andreyksu.controller.ICalcController;
 
 /**
  * Класс служит для конструирования и отображения полей самого калькулятора.

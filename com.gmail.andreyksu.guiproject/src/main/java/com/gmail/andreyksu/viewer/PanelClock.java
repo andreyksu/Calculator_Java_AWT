@@ -1,11 +1,11 @@
-package com.gmail.andreyksu.viewpack;
+package com.gmail.andreyksu.viewer;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.StringTokenizer;
 
-import com.gmail.andreyksu.controlpack.ICalcController;
+import com.gmail.andreyksu.controller.ICalcController;
 
 // TODO: Дать вменяемое наименование переменным, возможо вынести рассчет в
 // отдельный класс, здесь лишь отображать/отрисовывать результаты.

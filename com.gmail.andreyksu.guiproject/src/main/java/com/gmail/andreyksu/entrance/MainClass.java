@@ -1,9 +1,9 @@
-package com.gmail.andreyksu.initpack;
+package com.gmail.andreyksu.entrance;
 
-import com.gmail.andreyksu.controlpack.CalcController;
-import com.gmail.andreyksu.controlpack.ICalcController;
-import com.gmail.andreyksu.modelpack.CalcModel;
-import com.gmail.andreyksu.modelpack.ICalcModel;
+import com.gmail.andreyksu.controller.CalcController;
+import com.gmail.andreyksu.controller.ICalcController;
+import com.gmail.andreyksu.model.CalcModel;
+import com.gmail.andreyksu.model.ICalcModel;
 
 public class MainClass {
     

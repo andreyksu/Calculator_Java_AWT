@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack;
+package com.gmail.andreyksu.model;
 
 import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
 import com.gmail.andreyksu.modelpack.saver.ISaver;

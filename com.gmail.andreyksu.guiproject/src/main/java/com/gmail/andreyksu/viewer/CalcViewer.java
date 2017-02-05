@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.viewpack;
+package com.gmail.andreyksu.viewer;
 
 import java.awt.Button;
 import java.awt.Canvas;
@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.gmail.andreyksu.controlpack.ICalcController;
+import com.gmail.andreyksu.controller.ICalcController;
 
 public class CalcViewer extends Frame implements ICalcViewer {
 

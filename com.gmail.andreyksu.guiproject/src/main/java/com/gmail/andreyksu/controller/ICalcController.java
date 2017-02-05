@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.controlpack;
+package com.gmail.andreyksu.controller;
 
 import com.gmail.andreyksu.observers.IResultObserver;
 import com.gmail.andreyksu.observers.ITimeObserver;

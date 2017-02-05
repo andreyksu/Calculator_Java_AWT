@@ -1,12 +1,12 @@
-package com.gmail.andreyksu.controlpack;
+package com.gmail.andreyksu.controller;
 
 import java.util.Date;
 
-import com.gmail.andreyksu.modelpack.ICalcModel;
+import com.gmail.andreyksu.model.ICalcModel;
 import com.gmail.andreyksu.observers.IResultObserver;
 import com.gmail.andreyksu.observers.ITimeObserver;
-import com.gmail.andreyksu.viewpack.CalcViewer;
-import com.gmail.andreyksu.viewpack.ICalcViewer;
+import com.gmail.andreyksu.viewer.CalcViewer;
+import com.gmail.andreyksu.viewer.ICalcViewer;
 
 public class CalcController implements ICalcController {
 
@@ -81,10 +81,9 @@ public class CalcController implements ICalcController {
 
     }
 
+    //TODO: Нужно переосмыслить данный метод и его необходимость.
     /**
-     * Проверяет путь на корреткность перед сохранением. TODO: Нужно
-     * переосмыслить данный метод и его необходимость.
-     * 
+     * Проверяет путь на корреткность перед сохранением.
      * @param path
      * @return
      */

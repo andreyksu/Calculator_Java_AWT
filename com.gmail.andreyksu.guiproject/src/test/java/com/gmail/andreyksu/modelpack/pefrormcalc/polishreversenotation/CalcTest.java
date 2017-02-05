@@ -1,11 +1,12 @@
-package com.gmail.andreyksu.guiproject;
+package com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation;
+
 
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
 
-public class TestCalc {
+public class CalcTest {
     
     @Test
     public void firstPassTestRPNCalc() throws Exception{

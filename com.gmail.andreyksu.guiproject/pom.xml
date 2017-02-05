@@ -25,22 +25,40 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
 			<version>2.8</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.8</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
+	<build>
+		<!-- Настройки в данной секции соответствуют дефолтным. Данную секцию можно 
+			и не указывать так как, данные настройки задаются автоматом. -->
+		<outputDirectory>target/classes</outputDirectory>
+		<!--<finalName>calc</finalName>-->
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+		</plugins>
 
-
-
-	<build>	
 		<pluginManagement>
 			<plugins>
+
+				<!-- Настройки компиляции -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -50,42 +68,50 @@
 						<target>1.8</target>
 					</configuration>
 				</plugin>
+
+				<!-- Копирование зависимостей в каталог lib. для выполнения нужно запускать: 
+					mvn dependency:copy-dependencies package -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
+					<configuration>
+						<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						<overWriteReleases>false</overWriteReleases>
+						<overWriteSnapshots>false</overWriteSnapshots>
+						<overWriteIfNewer>true</overWriteIfNewer>
+					</configuration>
 					<executions>
 						<execution>
 							<id>copy-dependencies</id>
-							<phase>prepare-package</phase> 							
+							<phase>package</phase>
 							<goals>
 								<goal>copy-dependencies</goal>
 							</goals>
-							<configuration>
-								<outputDirectory>${project.build.directory}/lib</outputDirectory>
-								<overWriteReleases>false</overWriteReleases>
-								<overWriteSnapshots>false</overWriteSnapshots>
-								<overWriteIfNewer>true</overWriteIfNewer>
-							</configuration>
 						</execution>
 					</executions>
 				</plugin>
+
+				<!-- Настройка файла MANIFEST.MF указываем главный класс, префикс для 
+					зависимостей lib. Указание в MANIFEST.MF необходимых зависимостей -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
 					<configuration>
 						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
 								<classpathPrefix>lib/</classpathPrefix>
+								<classpathLayoutType>simple</classpathLayoutType>
 								<mainClass>com.gmail.andreyksu.initpack.MainClass</mainClass>
 							</manifest>
-							<manifestEntries>
-								<Class-Path>lib/</Class-Path>
-							</manifestEntries>
 						</archive>
+						<!--<finalName>calc</finalName> -->
 					</configuration>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
+
 </project>

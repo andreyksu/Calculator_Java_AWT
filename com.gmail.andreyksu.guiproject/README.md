@@ -15,7 +15,7 @@ The project is an calculator with analog clock. GUI is based on AWT. The calcula
 Для сборки продукта нужно:
 - Установить Maven.
 - Перейти в род. Каталог проекта
-- Выполнить команду mvn .....
+- Выполнить команду mvn package 
 - В результате получим исполняемый jar файл.
 
-Для запуска исполняемого jar файла необходимо выполнить java -jars
+Для запуска исполняемого jar файла необходимо выполнить java -jar <file.jar>

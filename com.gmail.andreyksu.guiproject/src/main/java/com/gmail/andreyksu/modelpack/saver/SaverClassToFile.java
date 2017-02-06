@@ -5,13 +5,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//TODO:Заменить консольные выводы на логирование через LOG4J. 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.ValidatorExpressionForRPN;
+
+// TODO:Заменить консольные выводы на логирование через LOG4J.
 
 /**
  * Используется моделью для сохранения результатов рассчета в файл.
- * 
  */
 public class SaverClassToFile implements ISaver {
+
+    private static final Logger log =
+            LogManager.getLogger(SaverClassToFile.class);
 
     PrintWriter pw;
 
@@ -31,9 +38,10 @@ public class SaverClassToFile implements ISaver {
                 pw.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
             message = new String(
                     "Не удалось создать файл или произвести запись в него");
+            log.error(message, e.getStackTrace());
+
         }
         return message;
     }

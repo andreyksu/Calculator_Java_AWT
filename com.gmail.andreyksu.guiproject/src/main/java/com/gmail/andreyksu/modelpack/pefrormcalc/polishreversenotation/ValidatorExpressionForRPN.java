@@ -24,7 +24,7 @@ public class ValidatorExpressionForRPN {
             return true;
         }
         time = System.nanoTime() - time;
-        log.info("Start time validate: " + (time));
+        log.info("Stop time validate: " + (time));
         return false;
     }
 

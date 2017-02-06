@@ -8,6 +8,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
 import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
 import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
@@ -17,6 +20,8 @@ import com.gmail.andreyksu.observers.IResultObserver;
 import com.gmail.andreyksu.observers.ITimeObserver;
 
 public class CalcModel implements ICalcModel {
+
+    private static final Logger log = LogManager.getLogger(CalcModel.class);
 
     private List<IResultObserver> resultCalcObserver =
             new ArrayList<IResultObserver>();
@@ -35,7 +40,7 @@ public class CalcModel implements ICalcModel {
 
     public CalcModel() {
         pci = new CalculatorWithRPN();
-//        pci = new PerformCalcByJS();
+        // pci = new PerformCalcByJS();
         saver = new SaverClassToFile();
         srartNotifyTime();
     }
@@ -88,7 +93,7 @@ public class CalcModel implements ICalcModel {
                         TimeUnit.SECONDS.sleep(1);
                         notifyTimeObserver();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error(e.getStackTrace());
                     }
                 }
             }

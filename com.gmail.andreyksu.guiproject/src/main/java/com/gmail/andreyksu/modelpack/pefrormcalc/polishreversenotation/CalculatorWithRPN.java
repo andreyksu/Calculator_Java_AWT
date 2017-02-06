@@ -220,11 +220,14 @@ public class CalculatorWithRPN implements ICalculator {
                     try {
                         stack.push((double) Double.parseDouble(s));
                     } catch (NumberFormatException exceptionFloat) {
-                        return result =
-                                "Содержется недопустимая последовательность символов";
+                        result = "NotValideExpression!";
+                        log.error(result, exceptionFloat.getStackTrace().toString());
+                        return result;
                     }
                 } catch (NullPointerException e) {
-                    return result = "NPE - поправьте строку";
+                    result = "NotValideExpression!";
+                    log.error(result, e.getStackTrace().toString());
+                    return result;
                 }
 
             }
@@ -250,12 +253,11 @@ public class CalculatorWithRPN implements ICalculator {
                 readyLine = calcRPNStrin(list);
                 return readyLine;
             } catch (UnsupportedOperatorException e) {
-                log.error("Невалидная строка. Невозможно произвести расчет.",
-                        e.getCause());
-                return "Contain Unsupported Opreator";
+                log.error("NotValideExpression!", e.getStackTrace());
+                return "NotValideExpression!";
             }
         }
-        return "Not valide expression!!!";
+        return "NotValideExpression!";
     }
 
 }

@@ -6,17 +6,9 @@ import com.gmail.andreyksu.model.CalcModel;
 import com.gmail.andreyksu.model.ICalcModel;
 
 public class MainClass {
-    
-    // TODO 
-    //перейти на log4j, все логгировать в файл, никаких конслольных выводов, нужно в мевен включить l4j
-    //Написать Junit тесты на все классы.
-    //Документировать методы
-    
-    
-
+ 
     /**
-     * Точка запуска программы.
-     * Инициируется модель и контроллер. 
+     * Точка запуска программы. Инициируется модель и контроллер.
      */
     public static void main(String[] args) {
         ICalcModel calcModel = new CalcModel();

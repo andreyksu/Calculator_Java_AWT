@@ -15,7 +15,7 @@ The project is an calculator with analog clock. GUI is based on AWT. The calcula
 Для сборки продукта нужно:
 - Установить Maven.
 - Перейти в род. Каталог проекта
-- Выполнить команду "mvn dependency:copy-dependencies package"
+- Выполнить команду "mvn clean verify dependency:copy-dependencies package"
 - В результате, в каталоге target получим исполняемый .jar файл и каталог ./lib с необходимыми зависимостями
 	-- В зависимости попали либы для логгирования log4j2   
 

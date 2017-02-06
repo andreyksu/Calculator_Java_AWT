@@ -27,7 +27,7 @@ public class PerformCalcByJS implements ICalculator {
             result = engine.eval(str).toString();
         } catch (ScriptException e) {
             result = "Not valid Expression!";
-            log.error(result, e.getCause());
+            log.error(result, e.getMessage(), e);
             return result;
         }
         return result;

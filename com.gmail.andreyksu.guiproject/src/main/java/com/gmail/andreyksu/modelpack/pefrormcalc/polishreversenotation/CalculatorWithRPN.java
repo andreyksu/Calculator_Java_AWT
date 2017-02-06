@@ -216,17 +216,17 @@ public class CalculatorWithRPN implements ICalculator {
             } else {
                 try {
                     stack.push((double) Integer.parseInt(s));
-                } catch (NumberFormatException exceptionInteger) {
+                } catch (NumberFormatException eI) {
                     try {
                         stack.push((double) Double.parseDouble(s));
-                    } catch (NumberFormatException exceptionFloat) {
+                    } catch (NumberFormatException eD) {
                         result = "NotValideExpression!";
-                        log.error(result, exceptionFloat.getStackTrace().toString());
+                        log.error(result, eD.getMessage(), eD);
                         return result;
                     }
                 } catch (NullPointerException e) {
                     result = "NotValideExpression!";
-                    log.error(result, e.getStackTrace().toString());
+                    log.error(result, e.getMessage(), e);
                     return result;
                 }
 
@@ -253,7 +253,7 @@ public class CalculatorWithRPN implements ICalculator {
                 readyLine = calcRPNStrin(list);
                 return readyLine;
             } catch (UnsupportedOperatorException e) {
-                log.error("NotValideExpression!", e.getStackTrace());
+                log.error("NotValideExpression!", e.getMessage(), e);
                 return "NotValideExpression!";
             }
         }

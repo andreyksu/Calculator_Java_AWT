@@ -40,7 +40,7 @@ public class SaverClassToFile implements ISaver {
         } catch (IOException e) {
             message = new String(
                     "Не удалось создать файл или произвести запись в него");
-            log.error(message, e.getStackTrace());
+            log.error(message, e.getMessage(), e);
 
         }
         return message;

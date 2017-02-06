@@ -93,7 +93,7 @@ public class CalcModel implements ICalcModel {
                         TimeUnit.SECONDS.sleep(1);
                         notifyTimeObserver();
                     } catch (InterruptedException e) {
-                        log.error(e.getStackTrace());
+                        log.error(e.getMessage(), e);
                     }
                 }
             }

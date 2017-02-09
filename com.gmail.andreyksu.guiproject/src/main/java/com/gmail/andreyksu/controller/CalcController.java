@@ -41,7 +41,8 @@ public class CalcController implements ICalcController {
 
     /**
      * Данный метод вызывается автоматом в отдельном потоке модели (в методе
-     * resultUpdate()) каждую секунду, для отрисовки времени.
+     * resultUpdate()) каждую секунду, для отрисовки времени - часов.
+     * См. PanekClock.
      */
 
     public void timeUpdate() {

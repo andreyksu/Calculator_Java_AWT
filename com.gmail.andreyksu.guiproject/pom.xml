@@ -63,6 +63,18 @@
 					</configuration>
 				</plugin>
 				
+				<!-- Настройка тестов -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.12.4</version>
+					<configuration>
+						<skipTests>${maven.test.skip}</skipTests>
+					</configuration>
+				</plugin>
+				
+				<!-- Настройка сборки в jar файл -->
+				
 				<!-- Настройка файла MANIFEST.MF указываем главный класс, префикс для 
 				зависимостей lib. Указание в MANIFEST.MF необходимых зависимостей -->
 				<plugin>
@@ -86,18 +98,8 @@
 					</configuration>
 				</plugin>
 				
-				<!-- Настройка тестов -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.12.4</version>
-					<configuration>
-						<skipTests>${maven.test.skip}</skipTests>
-					</configuration>
-				</plugin>
-
 				<!-- Копирование зависимостей в каталог lib. для выполнения нужно запускать: 
-					mvn dependency:copy-dependencies package -->
+				mvn dependency:copy-dependencies package -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -119,6 +121,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-	</build>
+</build>
 
 </project>

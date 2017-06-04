@@ -73,54 +73,23 @@
 					</configuration>
 				</plugin>
 				
-				<!-- Настройка сборки в jar файл -->
-				
-				<!-- Настройка файла MANIFEST.MF указываем главный класс, префикс для 
-				зависимостей lib. Указание в MANIFEST.MF необходимых зависимостей -->
+				<!-- Сборка продукта со всеми зависимостями в Jar файле. Запускать как  mvn clean assembly:assembly. А файл с предыдущим коммитом запускать как mvn clean package или ранее писал mvn dependency:copy-dependencies package-->
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
+					<artifactId>maven-assembly-plugin</artifactId>
 					<configuration>
-						<excludes>
-							<exclude>**/log4j.properties</exclude>
-						</excludes>
 						<archive>
 							<manifest>
-								<addClasspath>true</addClasspath>
-								<classpathPrefix>lib/</classpathPrefix>
-								<classpathLayoutType>simple</classpathLayoutType>
-								<!--<mainClass>${mainClass}</mainClass> -->
 								<mainClass>com.gmail.andreyksu.entrance.MainClass</mainClass>
 							</manifest>
 						</archive>
-						<!--<finalName>calc</finalName> -->
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
 					</configuration>
 				</plugin>
 				
-				<!-- Копирование зависимостей в каталог lib. для выполнения нужно запускать: 
-				mvn dependency:copy-dependencies package -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<configuration>
-						<outputDirectory>${project.build.directory}/lib</outputDirectory>
-						<overWriteReleases>false</overWriteReleases>
-						<overWriteSnapshots>false</overWriteSnapshots>
-						<overWriteIfNewer>true</overWriteIfNewer>
-					</configuration>
-					<executions>
-						<execution>
-							<id>copy-dependencies</id>
-							<phase>package</phase>
-							<goals>
-								<goal>copy-dependencies</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
 			</plugins>
 		</pluginManagement>
-</build>
+	</build>
 
 </project>

@@ -1,12 +1,12 @@
-package com.gmail.andreyksu.controller;
+package ru.andreyksu.annikonenkov.controller;
 
 import java.util.Date;
 
-import com.gmail.andreyksu.model.ICalcModel;
-import com.gmail.andreyksu.observers.IResultObserver;
-import com.gmail.andreyksu.observers.ITimeObserver;
-import com.gmail.andreyksu.viewer.CalcViewer;
-import com.gmail.andreyksu.viewer.ICalcViewer;
+import ru.andreyksu.annikonenkov.model.ICalcModel;
+import ru.andreyksu.annikonenkov.observers.IResultObserver;
+import ru.andreyksu.annikonenkov.observers.ITimeObserver;
+import ru.andreyksu.annikonenkov.viewer.CalcViewer;
+import ru.andreyksu.annikonenkov.viewer.ICalcViewer;
 
 public class CalcController implements ICalcController {
 

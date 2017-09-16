@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation;
+package ru.andreyksu.annikonenkov.modelpack.pefrormcalc.polishreversenotation;
 
 public class UnsupportedOperatorException extends Exception {
 	public UnsupportedOperatorException() {

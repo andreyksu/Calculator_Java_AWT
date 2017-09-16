@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation;
+package ru.andreyksu.annikonenkov.modelpack.pefrormcalc.polishreversenotation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

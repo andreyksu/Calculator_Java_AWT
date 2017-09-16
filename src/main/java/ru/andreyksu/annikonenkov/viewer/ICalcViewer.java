@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.viewer;
+package ru.andreyksu.annikonenkov.viewer;
 
 import java.awt.Button;
 import java.awt.TextField;

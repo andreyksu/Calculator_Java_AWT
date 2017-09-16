@@ -2,7 +2,8 @@ package com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation;
 
 import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
-import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
+
+import ru.andreyksu.annikonenkov.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
 
 public class CalcTest {
 

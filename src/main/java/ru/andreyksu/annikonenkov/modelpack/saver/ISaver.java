@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.saver;
+package ru.andreyksu.annikonenkov.modelpack.saver;
 
 public interface ISaver {
 

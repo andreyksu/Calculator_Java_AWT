@@ -1,9 +1,9 @@
-package com.gmail.andreyksu.entrance;
+package ru.andreyksu.annikonenkov.entrance;
 
-import com.gmail.andreyksu.controller.CalcController;
-import com.gmail.andreyksu.controller.ICalcController;
-import com.gmail.andreyksu.model.CalcModel;
-import com.gmail.andreyksu.model.ICalcModel;
+import ru.andreyksu.annikonenkov.controller.CalcController;
+import ru.andreyksu.annikonenkov.controller.ICalcController;
+import ru.andreyksu.annikonenkov.model.CalcModel;
+import ru.andreyksu.annikonenkov.model.ICalcModel;
 
 public class MainClass {
  

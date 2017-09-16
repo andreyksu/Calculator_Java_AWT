@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.pefrormcalc;
+package ru.andreyksu.annikonenkov.modelpack.pefrormcalc;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

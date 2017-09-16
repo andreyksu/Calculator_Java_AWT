@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.pefrormcalc;
+package ru.andreyksu.annikonenkov.modelpack.pefrormcalc;
 
 public interface ICalculator {
 

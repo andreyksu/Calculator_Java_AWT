@@ -1,7 +1,7 @@
-package com.gmail.andreyksu.controller;
+package ru.andreyksu.annikonenkov.controller;
 
-import com.gmail.andreyksu.observers.IResultObserver;
-import com.gmail.andreyksu.observers.ITimeObserver;
+import ru.andreyksu.annikonenkov.observers.IResultObserver;
+import ru.andreyksu.annikonenkov.observers.ITimeObserver;
 
 public interface ICalcController extends IResultObserver, ITimeObserver {
 

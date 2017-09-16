@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.model;
+package ru.andreyksu.annikonenkov.model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,13 +11,13 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
-import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
-import com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
-import com.gmail.andreyksu.modelpack.saver.SaverClassToFile;
-import com.gmail.andreyksu.modelpack.saver.ISaver;
-import com.gmail.andreyksu.observers.IResultObserver;
-import com.gmail.andreyksu.observers.ITimeObserver;
+import ru.andreyksu.annikonenkov.modelpack.pefrormcalc.ICalculator;
+import ru.andreyksu.annikonenkov.modelpack.pefrormcalc.PerformCalcByJS;
+import ru.andreyksu.annikonenkov.modelpack.pefrormcalc.polishreversenotation.CalculatorWithRPN;
+import ru.andreyksu.annikonenkov.modelpack.saver.ISaver;
+import ru.andreyksu.annikonenkov.modelpack.saver.SaverClassToFile;
+import ru.andreyksu.annikonenkov.observers.IResultObserver;
+import ru.andreyksu.annikonenkov.observers.ITimeObserver;
 
 public class CalcModel implements ICalcModel {
 

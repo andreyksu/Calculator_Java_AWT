@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation;
+package ru.andreyksu.annikonenkov.modelpack.pefrormcalc.polishreversenotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Stack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gmail.andreyksu.modelpack.pefrormcalc.ICalculator;
-import com.gmail.andreyksu.modelpack.pefrormcalc.PerformCalcByJS;
+import ru.andreyksu.annikonenkov.modelpack.pefrormcalc.ICalculator;
+import ru.andreyksu.annikonenkov.modelpack.pefrormcalc.PerformCalcByJS;
 
 public class CalculatorWithRPN implements ICalculator {
 

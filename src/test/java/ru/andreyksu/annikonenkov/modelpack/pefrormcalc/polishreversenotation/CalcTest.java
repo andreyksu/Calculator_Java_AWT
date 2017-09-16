@@ -1,4 +1,4 @@
-package com.gmail.andreyksu.modelpack.pefrormcalc.polishreversenotation;
+package ru.andreyksu.annikonenkov.modelpack.pefrormcalc.polishreversenotation;
 
 import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	<!-- Head -->
 	<groupId>ru.andreyksu.annikonenkov</groupId>
 	<artifactId>calc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -24,10 +24,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.8</jdk.version>
+		<maven.compiler.plugin.version>3.5</maven.compiler.plugin.version>
+		<maven.surefire.plugin.version>2.12.4</maven.surefire.plugin.version>
+		<maven.assembly.plugin.version>2.6</maven.assembly.plugin.version>
 		<log4j.version>2.8</log4j.version>
 		<junit.version>4.8.2</junit.version>
 		<maven.test.skip>false</maven.test.skip>
-		<mainClass>com.gmail.andreyksu.entrance.MainClass</mainClass>
+		<mainClass>ru.andreyksu.annikonenkov.entrance.MainClass</mainClass>
 	</properties>
 
 	<dependencies>
@@ -49,59 +52,61 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Build -->
 	<build>
-		<pluginManagement>
-			<plugins>
+		<plugins>
+			<!-- Настройки компиляции -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.6</version>
-					<configuration>
-						<outputEncoding>UTF-8</outputEncoding>
-					</configuration>
-				</plugin>
+			<!-- Настройка тестов -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.plugin.version}</version>
+				<configuration>
+					<skipTests>${maven.test.skip}</skipTests>
+				</configuration>
+			</plugin>
 
-				<!-- Настройки компиляции -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.5</version>
-					<configuration>
-						<source>${jdk.version}</source>
-						<target>${jdk.version}</target>
-					</configuration>
-				</plugin>
+			<!-- Сборка продукта со всеми зависимостями в Jar файле. Запускать как 
+				mvn clean assembly:assembly. А файл с предыдущим коммитом запускать как mvn 
+				clean package или ранее писал mvn dependency:copy-dependencies package -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven.assembly.plugin.version}</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 
-				<!-- Настройка тестов -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.12.4</version>
-					<configuration>
-						<skipTests>${maven.test.skip}</skipTests>
-					</configuration>
-				</plugin>
+					<archive>
+						<manifest>
+							<mainClass>${mainClass}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 
-				<!-- Сборка продукта со всеми зависимостями в Jar файле. Запускать как 
-					mvn clean assembly:assembly. А файл с предыдущим коммитом запускать как mvn 
-					clean package или ранее писал mvn dependency:copy-dependencies package -->
-				<plugin>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<configuration>
-						<archive>
-							<manifest>
-								<mainClass>com.gmail.andreyksu.entrance.MainClass</mainClass>
-							</manifest>
-						</archive>
-						<descriptorRefs>
-							<descriptorRef>jar-with-dependencies</descriptorRef>
-						</descriptorRefs>
-					</configuration>
-				</plugin>
+				<executions>
+					<execution>
+						<id>trigger-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-			</plugins>
-		</pluginManagement>
+		</plugins>
 	</build>
 
 </project>

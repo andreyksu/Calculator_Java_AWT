@@ -34,8 +34,11 @@
 #Eclipse
 *.classpath
 *.project
+.settings/
+.metadata/
 
 # virtual machine crash logs
 hs_err_pid*
 
 *.iws
+/bin/

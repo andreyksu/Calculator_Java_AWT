@@ -70,15 +70,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven.surefire.plugin.version}</version>
+				<version>${maven.surefire.plugin.version}</version>				
 				<configuration>
 					<skipTests>${maven.test.skip}</skipTests>
 				</configuration>
 			</plugin>
+			
+			<!-- Сборка -->
 
-			<!-- Сборка продукта со всеми зависимостями в Jar файле. Запускать как 
-				mvn clean assembly:assembly. А файл с предыдущим коммитом запускать как mvn 
-				clean package или ранее писал mvn dependency:copy-dependencies package -->
+			<!-- Сборка продукта со всеми зависимостями в jar файле. Запускать как "mvn clean assembly:assembly" или "mvn clean compile assembly:single" --> 
+			<!-- Или в данном конкретном случае "mvn install" -->
+			<!-- У такой сорки есть мину, если есть одинаковые файлы (допустим настроечные) в разных jar то они перетираются. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -97,13 +99,48 @@
 
 				<executions>
 					<execution>
-						<id>trigger-assembly</id>
+						<id>make-assembly</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- Сборка с зависимостями в каталог lib -->
+			<!-- Можно запускать как mvn clean package или mvn dependency:copy-dependencies package -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>${mainClass}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 
 		</plugins>
